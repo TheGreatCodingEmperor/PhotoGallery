@@ -94,6 +94,9 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   download() {
+    this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE]).then(res => {});
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE).then(res => console.log("external read",res.hasPermission));
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE).then(res => console.log("external write",res.hasPermission));
     this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.INTERNET).then(res => {
       this.downloadFile();
     }, err => {
